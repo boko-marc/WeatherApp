@@ -1,10 +1,13 @@
-import $axios from "@/axios"
-import { objectToFormData } from "@/utils";
+// weather-service.js
+import $axios from "@/axios";
 
 export default {
-    searchWeather(payload) {
-        const data = objectToFormData(payload)
-        return $axios.post('/fetch', data)
+    fetchWeatherData(cityName) {
+        return $axios.get("/weather", {
+            params: {
+                q: cityName,
+            },
+        });
+    },
+};
 
-    }
-}

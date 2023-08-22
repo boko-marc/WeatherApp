@@ -1,25 +1,32 @@
 <template>
-    <div class="bg-white rounded shadow-md p-4 m-2 max-w-md">
-      <h2 class="text-xl font-semibold mb-2">{{ city }}</h2>
-      <div class="text-gray-700">
-        <p class="mb-1">Temperature: {{ temperature }}°C</p>
-        <p class="mb-1">Weather: {{ weatherDescription }}</p>
-        <p class="mb-1">Sunrise: {{ sunriseTime }}</p>
-        <p class="mb-1">Sunset: {{ sunsetTime }}</p>
-      </div>
+  <div v-if="weatherDataAvailable" class="bg-white rounded shadow-md p-4 m-2 max-w-md">
+    <h2 class="text-xl font-semibold mb-2">{{ city }}</h2>
+    <div class="text-gray-700">
+      <p class="mb-1">Temperature: {{ temperature }}°C</p>
+      <p class="mb-1">Weather: {{ weatherDescription }}</p>
+      <p class="mb-1">Sunrise: {{ sunriseTime }}</p>
+      <p class="mb-1">Sunset: {{ sunsetTime }}</p>
     </div>
-  </template>
+  </div>
+</template>
   
   <script>
-  export default {
-    name: 'WeatherCard',
-    props: {
-      city: String,
-      temperature: Number,
-      weatherDescription: String,
-      sunriseTime: String,
-      sunsetTime: String,
-    },
-  };
-  </script>
+import { computed } from "vue";
+import { useWeatherStore } from "@/store/weather";
+export default {
+  name: "WeatherCard",
+  props: {
+    city: String,
+    temperature: Number,
+    weatherDescription: String,
+    sunriseTime: String,
+    sunsetTime: String,
+  },
+  computed: {
+    weatherDataAvailable: computed(
+      () => useWeatherStore().weatherDataAvailable
+    ),
+  },
+};
+</script>
   

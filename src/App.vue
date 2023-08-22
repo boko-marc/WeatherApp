@@ -1,5 +1,5 @@
 <template>
-  <div class="container mx-auto max-w-md bg-red-300 mt-4 md:mt-32 rounded-2xl px-4">
+  <div class="container mx-auto max-w-min bg-red-300 mt-4 md:mt-32 rounded-2xl px-4">
     <header class="text-gray-600 body-font">
       <div
         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
