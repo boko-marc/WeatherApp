@@ -15,12 +15,14 @@
             name="hero-field"
             placeholder="Veuillez saisir la ville"
             v-model="cityName"
+            required="true"
             class="bg-gray-100 rounded border bg-opacity-50 border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:bg-transparent focus:border-indigo-500 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
           />
         </div>
         <button
           class="text-white bg-indigo-500 border-0 py-2 px-7 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-          @click="fetchWeather"
+          :disabled="cityName == ''"
+          v-on:click="filterWeatherData"
         >
           Rechercher
         </button>
@@ -44,17 +46,15 @@ export default {
   computed: {
     ...mapStores(useWeatherStore),
   },
-  //   props: {
-  //     msg: String
-  //   }
 
+  emits: ["searchEvent"],
   methods: {
-    async fetchWeather() {
+    async filterWeatherData() {
       try {
         const store = useWeatherStore();
-        const response = await store.fetchWeatherData(this.cityName);
-        console.log("res", response);
-        console.log("store", store.weatherData);
+        store.weatherData = null;
+        await store.fetchWeatherData(this.cityName);
+        this.$emit("searchEvent", store.weatherData);
       } catch (error) {
         alert(error.response.data.message);
       }

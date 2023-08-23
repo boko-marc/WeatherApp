@@ -4,11 +4,9 @@ import $service from '@/callApi/weather'
 export const useWeatherStore = defineStore('weather', {
     state: () => ({
         weatherData: null,
-        weatherDataAvailable: false,
     }),
 
     getters: {
-        weatherDataAvailable: (state) => state.weatherDataAvailable,
     },
     actions: {
         async fetchWeatherData(cityName) {

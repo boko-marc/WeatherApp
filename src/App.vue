@@ -1,5 +1,7 @@
 <template>
-  <div class="container mx-auto max-w-min bg-red-300 mt-4 md:mt-32 rounded-2xl px-4">
+  <div
+    class="container mx-auto max-w-min bg-red-300 mt-4 md:mt-32 rounded-2xl px-4"
+  >
     <header class="text-gray-600 body-font">
       <div
         class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
@@ -13,8 +15,11 @@
       </div>
     </header>
     <section>
-      <CitySearch></CitySearch>
-      <WeatherCard></WeatherCard>
+      <CitySearch @search-event="handleWeatherDataFetched"></CitySearch>
+      <WeatherCard
+        v-if="weatherDataFetched != null"
+        :weatherData="weatherDataFetched"
+      ></WeatherCard>
     </section>
 
     <footer class="text-gray-600 body-font">
@@ -39,13 +44,26 @@
 </template>
 
 <script>
-import  CitySearch  from "./components/CitySearch.vue";
-import WeatherCard from './components/WeatherCard.vue';
+import CitySearch from "./components/CitySearch.vue";
+import WeatherCard from "./components/WeatherCard.vue";
 
 export default {
   name: "App",
   components: {
-    CitySearch,WeatherCard
+    CitySearch,
+    WeatherCard,
+  },
+
+  data() {
+    return {
+      weatherDataFetched: null,
+    };
+  },
+
+  methods: {
+    handleWeatherDataFetched(weatherData) {
+      this.weatherDataFetched = weatherData;
+    },
   },
 };
 </script>
