@@ -1,4 +1,4 @@
-import axios from "axios";
+import {axios} from "axios";
 
 const apiKey = '63c98329f7ddcace00afe83cfe164bda';
 
