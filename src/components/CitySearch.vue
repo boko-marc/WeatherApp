@@ -20,11 +20,12 @@
           />
         </div>
         <button
-          class="text-white bg-indigo-500 border-0 py-2 px-7 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-          :disabled="cityName == ''"
+          class="flex text-white bg-indigo-500 border-0 py-2 px-7 focus:outline-none hover:bg-indigo-600 rounded text-lg"
+          :disabled="cityName.length === 0"
           v-on:click="filterWeatherData"
         >
-          Rechercher
+          <p v-if="loading">Chargement ....</p>
+          <p v-else>Rechercher</p>
         </button>
       </div>
     </div>
@@ -41,6 +42,7 @@ export default {
   data() {
     return {
       cityName: "",
+      loading: false,
     };
   },
   computed: {
@@ -50,13 +52,18 @@ export default {
   emits: ["searchEvent"],
   methods: {
     async filterWeatherData() {
+      this.loading = true;
       const store = useWeatherStore();
       store.weatherData = null;
       try {
         const store = useWeatherStore();
         await store.fetchWeatherData(this.cityName);
+        this.loading = false;
+
         this.$emit("searchEvent", store.weatherData); // emit event
       } catch (error) {
+        this.loading = false;
+
         this.$emit("searchEvent", store.weatherData); // emit event with store weatherData null
         alert(error.response.data.message);
       }

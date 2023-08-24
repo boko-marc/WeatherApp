@@ -1,23 +1,41 @@
-<template>
-  <div class="bg-white rounded shadow-md p-4 m-2 max-w-md">
-    <div class="text-gray-700">
-      <p class="mb-1">
-        Temperature: {{ celsiusTemp }}°C |
-        {{ $filters.formatToFahrenheit(celsiusTemp) }} °F
-      </p>
-      <p class="mb-1">Humidité: {{ humidity }} %</p>
 
-      <p class="mb-1">Vitesse du vent: {{ windSpeed }} Km/h</p>
-      <img :src="`https://openweathermap.org/img/wn/${icon}@2x.png`" alt="" />
-
-      <p class="mb-1">Weather: {{ weatherDescription }}</p>
-      <p class="mb-1">
-        Ville: {{ countryName }} ({{ weatherData.sys.country }})
-      </p>
-      <p class="mb-1">Donnée calculées: {{ moment }}</p>
-
-      <p class="mb-1">Levé du soleil à: {{ sunriseTime }}</p>
-      <p class="mb-1">Couché du soleil à : {{ sunsetTime }}</p>
+   <template>
+  <div class="bg-white p-4 rounded-lg shadow-md">
+    <div class="flex justify-between item-center mb-4">
+      <h2 class="text-xl font-semibold mb-4">
+        {{ countryName }} ({{ weatherData.sys.country }})
+      </h2>
+      <span> {{ moment }} </span>
+    </div>
+    <div class="flex items-center border rounded">
+      <div class="mr-4">
+        <img
+          :src="`https://openweathermap.org/img/wn/${icon}@2x.png`"
+          :alt="weatherDescription"
+          class="h-20 w-20 bg-black-100"
+        />
+      </div>
+      <div>
+        <div class="font-semibold text-2xl">
+          {{ celsiusTemp }}°C |
+          {{ $filters.formatToFahrenheit(celsiusTemp) }} °F
+        </div>
+        <div class="text-gray-600">{{ weatherDescription }}</div>
+      </div>
+    </div>
+    <div class="mt-4">
+      <div class="mb-2">
+        Levé du soleil à : <span> {{ sunriseTime }}</span>
+      </div>
+      <div class="mb-2">
+        Couché du soleil à : <span> {{ sunsetTime }}</span>
+      </div>
+      <div class="mb-2">
+        Humidité: <span>{{ humidity }} %</span>
+      </div>
+      <div>
+        Vitesse du vent: <span>{{ windSpeed }} Km/h</span>
+      </div>
     </div>
   </div>
 </template>
@@ -57,7 +75,7 @@ export default {
     },
     //Time of data calculation
     moment() {
-      return moment.unix(this.weatherData.dt).locale("fr").fromNow();
+      return moment.unix(this.weatherData.dt).locale("fr").format("llll");
     },
     sunriseTime() {
       return moment
@@ -75,4 +93,8 @@ export default {
   methods: {},
 };
 </script>
+  
+  <style scoped>
+/* Add Tailwind classes or custom styles here */
+</style>
   
