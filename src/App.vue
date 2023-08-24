@@ -1,6 +1,6 @@
 <template>
   <div
-    class="container mx-auto max-w-min bg-red-300 mt-4 md:mt-32 rounded-2xl px-4"
+    class="container mx-auto max-w-min bg-gray-100 mt-4 md:mt-32 rounded-2xl px-4"
   >
     <header class="text-gray-600 body-font">
       <div
