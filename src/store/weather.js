@@ -11,7 +11,7 @@ export const useWeatherStore = defineStore('weather', {
     actions: {
         async fetchWeatherData(cityName) {
             const response = await $service.fetchWeatherData(cityName);
-            this.weatherData = response.data;
+            this.weatherData = response.data; 
             return response.data;
         },
     },

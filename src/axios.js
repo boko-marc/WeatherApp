@@ -2,19 +2,19 @@ import axios from "axios";
 
 const apiKey = '63c98329f7ddcace00afe83cfe164bda';
 
-// Créez une instance Axios personnalisée avec la configuration de base
+// create axios instance
 const axiosInstance = axios.create({
-  baseURL: "https://api.openweathermap.org/data/2.5", // URL de base commune
+  baseURL: "https://api.openweathermap.org/data/2.5", // base URL
   headers: {
     "Content-type": "application/json"
   }
 });
 
-// Créez une fonction pour ajouter votre clé API aux requêtes
+// add axios inteceptors for every request
 axiosInstance.interceptors.request.use(config => {
   config.params = {
     ...config.params,
-    appid: apiKey // Ajoutez votre clé API à chaque requête
+    appid: apiKey // Add api key
   };
   return config;
 });

@@ -34,7 +34,7 @@
 
 <script>
 import { mapStores } from "pinia";
-import { useWeatherStore } from "@/store/weather"; // Importez le store
+import { useWeatherStore } from "@/store/weather"; // import  store
 
 export default {
   name: "CitySearch",
@@ -50,12 +50,14 @@ export default {
   emits: ["searchEvent"],
   methods: {
     async filterWeatherData() {
+      const store = useWeatherStore();
+      store.weatherData = null;
       try {
         const store = useWeatherStore();
-        store.weatherData = null;
         await store.fetchWeatherData(this.cityName);
-        this.$emit("searchEvent", store.weatherData);
+        this.$emit("searchEvent", store.weatherData); // emit event
       } catch (error) {
+        this.$emit("searchEvent", store.weatherData); // emit event with store weatherData null
         alert(error.response.data.message);
       }
     },
