@@ -21,7 +21,7 @@
         </div>
         <button
           class="flex text-white bg-indigo-500 border-0 py-2 px-7 focus:outline-none hover:bg-indigo-600 rounded text-lg"
-          :disabled="cityName.length === 0"
+          :disabled="cityName.trim().length === 0"
           v-on:click="filterWeatherData"
         >
           <p v-if="loading">Chargement ....</p>
