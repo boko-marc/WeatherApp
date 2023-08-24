@@ -1,6 +1,5 @@
 <template>
   <div class="bg-white rounded shadow-md p-4 m-2 max-w-md">
-    <h2 class="text-xl font-semibold mb-2">{{ city }}</h2>
     <div class="text-gray-700">
       <p class="mb-1">
         Temperature: {{ celsiusTemp }}°C |
